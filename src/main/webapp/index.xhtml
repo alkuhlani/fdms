@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <h:head>
+        <title>#{msg.newAgeErp}</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    </h:head>
+    <h:body id="body">
+        <f:view locale="#{not empty session.getAttribute('language')? session.getAttribute('language') : 'ar'}">
+
+            <div id="top">
+                <div id="options-div">
+                    <h:form>
+                        <i jsf:id="languages" class="fa fa-language top-icon"/>
+                        <p:menu overlay="true" trigger="languages" my="left top" at="left bottom">
+                            <p:menuitem value="عربي" ajax="false" actionListener="#{securityController.changeLanguage('ar')}"/>
+                            <p:menuitem value="English" ajax="false" actionListener="#{securityController.changeLanguage('en')}"/>
+                        </p:menu>
+                        <i jsf:id="profile" class="fa fa-user-circle top-icon"/>
+                        <p:menu overlay="true" trigger="profile" my="left top" at="left bottom">
+                            <p:menuitem value="#{msg.logout}" actionListener="#{securityController.logout()}" action="/index.xhtml/?faces-redirect=true"/>
+                        </p:menu>
+                    </h:form>
+                </div>
+            </div>
+
+            <div id="mySidenav">
+                <h:form>
+                    <p:commandLink value="#{msg.users}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/security/user.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.groups}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/security/group.xhtml')}"/>
+                </h:form>
+                <p:separator/>
+            </div>
+
+            <div id="content">
+                <h:panelGroup id="mainContents" layout="block">
+                    <ui:include src="#{paginationController.currentContent}" />
+                </h:panelGroup>
+            </div>
+
+            <p:growl id="globalMessages" />
+
+            <h:form id="confarmForm">
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="${msg.yes}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="${msg.no}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </h:form>
+
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                <h:outputText value=" #{msg.processing} ..." />
+            </p:dialog>
+
+        </f:view>
+    </h:body>
+</html>

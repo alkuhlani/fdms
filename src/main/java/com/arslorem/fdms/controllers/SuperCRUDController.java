@@ -1,6 +1,6 @@
 package com.arslorem.fdms.controllers;
 
-import com.arslorem.fdms.entities.StampedNamedEntity;
+import com.arslorem.fdms.entities.SuperEntity;
 import com.arslorem.fdms.services.SecurityService;
 import com.arslorem.fdms.services.SuperCRUDService;
 import static com.arslorem.fdms.util.Helper.addFacesMessage;
@@ -20,9 +20,8 @@ import static com.arslorem.fdms.util.Helper.msg;
  *
  * @author mohammed
  * @param <E>
- * @param <S>
  */
-public class SuperCRUDController<E extends StampedNamedEntity, S extends SuperCRUDService<E>> implements Serializable {
+public class SuperCRUDController<E extends SuperEntity> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,7 +29,7 @@ public class SuperCRUDController<E extends StampedNamedEntity, S extends SuperCR
     protected List<E> items;
 
     @Inject
-    protected S service;
+    protected SuperCRUDService<E> service;
 
     @Inject
     protected SecurityService ss;

@@ -2,9 +2,7 @@ package com.arslorem.fdms.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -19,7 +17,7 @@ public class SuperEntity implements Serializable {
 
     @Id
     @Column(name = "ID")
-    protected Long id = UUID.randomUUID().getLeastSignificantBits();
+    protected Long id;
 
     public SuperEntity() {
     }

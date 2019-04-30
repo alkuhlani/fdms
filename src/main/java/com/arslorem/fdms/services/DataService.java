@@ -19,7 +19,7 @@ import java.util.Objects;
 @Stateless
 public class DataService {
 
-    @PersistenceContext(unitName = "ERPPU")
+    @PersistenceContext(unitName = "FDMSPU")
     private EntityManager em;
 
     public void persist(SuperEntity e) {

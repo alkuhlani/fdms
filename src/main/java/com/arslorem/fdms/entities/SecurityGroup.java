@@ -20,6 +20,7 @@ public class SecurityGroup extends StampedNamedEntity {
 
     @ManyToMany(mappedBy = "groups")
     private List<SecurityUser> users;
+    
     @ManyToMany
     @JoinTable(name = "GROUP_PERMISSION", joinColumns = @JoinColumn(name = "GROUP_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "PERMISSION_ID", referencedColumnName = "ID"))
     private List<SecurityPermission> permissions;

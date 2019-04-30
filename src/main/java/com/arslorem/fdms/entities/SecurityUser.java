@@ -9,8 +9,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import javax.persistence.FetchType;
-
 /**
  *
  * @author mohammed
@@ -24,14 +22,17 @@ public class SecurityUser extends StampedNamedEntity {
 
     @Column(name = "USER_NAME", unique = true, nullable = false)
     private String userName;
+    
     @Column(name = "PASSWORD")
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER)
+    
+    @ManyToMany
     @JoinTable(name = "USER_GROUP",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "GROUP_ID", referencedColumnName = "ID"))
     List<SecurityGroup> groups;
-    @ManyToMany(fetch = FetchType.EAGER)
+    
+    @ManyToMany
     @JoinTable(name = "USER_PERMISSION",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "PERMISSION_ID", referencedColumnName = "ID"))

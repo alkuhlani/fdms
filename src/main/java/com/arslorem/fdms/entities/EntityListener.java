@@ -1,6 +1,7 @@
 package com.arslorem.fdms.entities;
 
 import java.util.Date;
+import java.util.UUID;
 import javax.faces.context.FacesContext;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -13,6 +14,7 @@ public class EntityListener {
 
     @PrePersist
     public void preCreate(StampedEntity entity) {
+        entity.setId(UUID.randomUUID().getLeastSignificantBits());
         entity.setCreateTime(new Date());
         entity.setCreateUser(new SecurityUser((Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userId")));
     }
