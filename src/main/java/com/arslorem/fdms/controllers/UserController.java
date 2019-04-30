@@ -1,7 +1,7 @@
 package com.arslorem.fdms.controllers;
 
 import com.arslorem.fdms.entities.SecurityUser;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
@@ -9,7 +9,7 @@ import javax.inject.Named;
  * @author mohammed
  */
 @Named
-@ViewScoped
+@SessionScoped
 public class UserController extends SuperCRUDController<SecurityUser> {
 
     private static final long serialVersionUID = 1L;
