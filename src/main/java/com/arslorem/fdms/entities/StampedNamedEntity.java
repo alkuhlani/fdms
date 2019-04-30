@@ -10,23 +10,16 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class StampedNamedEntity extends StampedEntity {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Column(name = "NAME", unique = true, nullable = false)
-	private String name;
+    @Column(name = "NAME", unique = true, nullable = false)
+    private String name;
 
-	public StampedNamedEntity() {
-	}
+    public String getName() {
+        return name;
+    }
 
-	public StampedNamedEntity(Long id) {
-		super(id);
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 }

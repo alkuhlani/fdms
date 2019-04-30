@@ -17,13 +17,6 @@ public class SecurityPermission extends StampedNamedEntity {
     @Column(name = "PERMISSION", unique = true, nullable = false)
     private String permission;
 
-    public SecurityPermission() {
-    }
-
-    public SecurityPermission(Long id) {
-        super(id);
-    }
-
     public String getPermission() {
         return permission;
     }

@@ -19,13 +19,6 @@ public class SuperEntity implements Serializable {
     @Column(name = "ID")
     protected Long id;
 
-    public SuperEntity() {
-    }
-
-    public SuperEntity(Long id) {
-        this.id = id;
-    }
-
     public Long getId() {
         return id;
     }

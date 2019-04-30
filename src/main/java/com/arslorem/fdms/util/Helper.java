@@ -19,7 +19,8 @@ public class Helper {
             return FacesContext
                     .getCurrentInstance()
                     .getApplication()
-                    .getResourceBundle(FacesContext.getCurrentInstance(), "msg").getString(key);
+                    .getResourceBundle(FacesContext.getCurrentInstance(), "msg")
+                    .getString(key);
         } catch (Exception e) {
             return key;
         }

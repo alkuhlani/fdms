@@ -22,28 +22,21 @@ public class SecurityUser extends StampedNamedEntity {
 
     @Column(name = "USER_NAME", unique = true, nullable = false)
     private String userName;
-    
+
     @Column(name = "PASSWORD")
     private String password;
-    
+
     @ManyToMany
     @JoinTable(name = "USER_GROUP",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "GROUP_ID", referencedColumnName = "ID"))
     List<SecurityGroup> groups;
-    
+
     @ManyToMany
     @JoinTable(name = "USER_PERMISSION",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "PERMISSION_ID", referencedColumnName = "ID"))
     List<SecurityPermission> permissions;
-
-    public SecurityUser() {
-    }
-
-    public SecurityUser(Long id) {
-        super(id);
-    }
 
     public String getUserName() {
         return userName;

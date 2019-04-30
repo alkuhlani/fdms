@@ -16,12 +16,16 @@ public class EntityListener {
     public void preCreate(StampedEntity entity) {
         entity.setId(UUID.randomUUID().getLeastSignificantBits());
         entity.setCreateTime(new Date());
-        entity.setCreateUser(new SecurityUser((Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userId")));
+        SecurityUser user = new SecurityUser();
+        user.setId((Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userId"));
+        entity.setCreateUser(user);
     }
 
     @PreUpdate
     public void preUpdate(StampedEntity entity) {
         entity.setUpdateTime(new Date());
-        entity.setUpdateUser(new SecurityUser((Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userId")));
+        SecurityUser user = new SecurityUser();
+        user.setId((Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userId"));
+        entity.setUpdateUser(user);
     }
 }

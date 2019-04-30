@@ -7,40 +7,40 @@ import javax.inject.Inject;
 /**
  *
  * @author mohammed
- * @param <T>
+ * @param <E>
  */
-public class SuperCRUDService<T extends SuperEntity> {
+public class SuperCRUDService<E extends SuperEntity> {
 
-    protected final Class<T> entityClass;
+    protected final Class<E> entityClass;
 
     @Inject
     protected DataService dataService;
 
-    public SuperCRUDService(Class<T> entityClass) {
+    public SuperCRUDService(Class<E> entityClass) {
         this.entityClass = entityClass;
     }
 
-    public List<T> find() {
+    public List<E> find() {
         return dataService.find(entityClass);
     }
 
-    public T find(Long id) {
+    public E find(Long id) {
         return dataService.find(entityClass, id);
     }
 
-    public void create(T entity) {
+    public void create(E entity) {
         dataService.persist(entity);
     }
 
-    public void update(T entity) {
+    public void update(E entity) {
         dataService.merge(entity);
     }
 
-    public void remove(T entity) {
+    public void remove(E entity) {
         dataService.remove(entity);
     }
 
-    public Class<T> getEntityClass() {
+    public Class<E> getEntityClass() {
         return entityClass;
     }
 }

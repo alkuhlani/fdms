@@ -23,8 +23,8 @@ import javax.validation.constraints.NotNull;
 @RequestScoped
 public class SecurityController implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
+    private static final long serialVersionUID = 1L;
+
     @NotNull
     private String username;
 
