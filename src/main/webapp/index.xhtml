@@ -36,6 +36,49 @@
                     <h:outputText value=" | "/>
                     <p:commandLink value="#{msg.groups}" update="mainContents"
                                    actionListener="#{paginationController.goTo('/WEB-INF/security/group.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.uoms}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/setting/uom.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.relativeTypes}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/setting/relativeType.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.idTypes}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/setting/idType.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.cities}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/geography/city.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.districts}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/geography/district.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.warehouses}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/stock/warehouse.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.item}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/stock/item.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.materialIssues}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/materialIssue/materialIssue.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.materialReceipts}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/materialReceipt/materialReceipt.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.materialTransfer}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/materialTransfer/materialTransfer.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.beneficiary}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/beneficiary/beneficiary.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.basketes}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/stock/basket.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.distribution}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/distribution/distribution.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.vouchers}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/basketVoucher/basketVoucher.xhtml')}"/>
+                    
                 </h:form>
                 <p:separator/>
             </div>
