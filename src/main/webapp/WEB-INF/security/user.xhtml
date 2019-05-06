@@ -6,5 +6,7 @@
     <ui:define name="formContent">
         <my:inputText id="userName" lable="${msg.userName}"
                       value="#{userController.item.userName}" required="true" />
+        <my:details value="#{userController.item.groups}" entityName="SecurityGroup"
+                    lable="#{msg.groups}" itemsName="groups"/>
     </ui:define>
 </ui:composition>

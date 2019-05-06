@@ -1,6 +1,7 @@
 package com.arslorem.fdms.entities;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -30,13 +31,13 @@ public class SecurityUser extends StampedNamedEntity {
     @JoinTable(name = "USER_GROUP",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "GROUP_ID", referencedColumnName = "ID"))
-    List<SecurityGroup> groups;
+    private List<SecurityGroup> groups;
 
     @ManyToMany
     @JoinTable(name = "USER_PERMISSION",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "PERMISSION_ID", referencedColumnName = "ID"))
-    List<SecurityPermission> permissions;
+    private List<SecurityPermission> permissions;
 
     public String getUserName() {
         return userName;

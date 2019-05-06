@@ -11,6 +11,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import java.util.Objects;
+import java.util.Set;
+import javax.persistence.metamodel.EntityType;
 
 /**
  *
@@ -36,7 +38,7 @@ public class DataService {
         em.remove(em.merge(e));
     }
 
-    public <T> List<T> find(Class<T> entityClass) {
+    public <T extends SuperEntity> List<T> find(Class<T> entityClass) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> cq = cb.createQuery(entityClass);
         Root<T> rootEntry = cq.from(entityClass);
@@ -45,11 +47,11 @@ public class DataService {
         return allQuery.getResultList();
     }
 
-    public <T> T find(Class<T> entityClass, Long id) {
+    public <T extends SuperEntity> T find(Class<T> entityClass, Long id) {
         return em.find(entityClass, id);
     }
 
-    public <T> List<T> find(String namedQuery, Class<T> entityClass, Object... params) {
+    public <T extends SuperEntity> List<T> find(String namedQuery, Class<T> entityClass, Object... params) {
         try {
             TypedQuery<T> typedQuery = em.createNamedQuery(namedQuery, entityClass);
             for (int i = 0; i < params.length; i += 2) {
@@ -61,7 +63,7 @@ public class DataService {
         }
     }
 
-    public <T> T findOne(String namedQuery, Class<T> entityClass, Object... params) {
+    public <T extends SuperEntity> T findOne(String namedQuery, Class<T> entityClass, Object... params) {
         try {
             TypedQuery<T> typedQuery = em.createNamedQuery(namedQuery, entityClass);
             for (int i = 0; i < params.length; i += 2) {
@@ -81,5 +83,15 @@ public class DataService {
         TypedQuery<Number> typedQuery = em.createQuery(criteriaQuery);
         Number maxId = typedQuery.getSingleResult();
         return Objects.isNull(maxId) ? 1l : maxId.longValue() + 1l;
+    }
+
+    public Class getEntityClass(String entityName) {
+        Set<EntityType<?>> entities = em.getEntityManagerFactory().getMetamodel().getEntities();
+        for (EntityType e : entities) {
+            if (Objects.equals(entityName, e.getName())) {
+                return e.getBindableJavaType();
+            }
+        }
+        return null;
     }
 }

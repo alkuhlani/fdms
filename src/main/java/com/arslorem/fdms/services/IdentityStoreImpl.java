@@ -1,6 +1,7 @@
 package com.arslorem.fdms.services;
 
 import com.arslorem.fdms.entities.SecurityUser;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -20,7 +21,7 @@ import javax.security.enterprise.identitystore.IdentityStore;
  * @author mohammed
  */
 @RequestScoped
-public class IdentityStoreImpl implements IdentityStore {
+public class IdentityStoreImpl implements IdentityStore, Serializable {
 
     @Inject
     private UserService userService;
