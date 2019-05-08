@@ -10,7 +10,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     </h:head>
-    <h:body id="body">
+    <h:body id="body" dir="#{session.getAttribute('language') ne 'en' ? 'RTL' : 'LTR'}">
         <f:view locale="#{not empty session.getAttribute('language')? session.getAttribute('language') : 'ar'}">
 
             <div id="top">
@@ -78,7 +78,7 @@
                     <h:outputText value=" | "/>
                     <p:commandLink value="#{msg.vouchers}" update="mainContents"
                                    actionListener="#{paginationController.goTo('/WEB-INF/basketVoucher/basketVoucher.xhtml')}"/>
-                    
+
                 </h:form>
                 <p:separator/>
             </div>

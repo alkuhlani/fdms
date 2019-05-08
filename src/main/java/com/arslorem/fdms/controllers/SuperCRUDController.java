@@ -1,6 +1,9 @@
 package com.arslorem.fdms.controllers;
 
+import com.arslorem.fdms.entities.SecurityGroup;
 import com.arslorem.fdms.entities.StampedNamedEntity;
+import com.arslorem.fdms.entities.SuperEntity;
+import com.arslorem.fdms.services.DataService;
 import com.arslorem.fdms.services.SuperCRUDService;
 import static com.arslorem.fdms.util.Helper.addFacesMessage;
 import java.io.Serializable;
@@ -14,6 +17,10 @@ import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
 
 import static com.arslorem.fdms.util.Helper.msg;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Objects;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -29,6 +36,8 @@ public class SuperCRUDController<E extends StampedNamedEntity> implements Serial
 
     @Inject
     protected SuperCRUDService<E> service;
+    @Inject
+    private DataService ds;
 
     public void prepareList() {
         item = null;
@@ -64,6 +73,45 @@ public class SuperCRUDController<E extends StampedNamedEntity> implements Serial
         service.remove(item);
         addFacesMessage(FacesMessage.SEVERITY_INFO, msg("removed"));
         item = null;
+    }
+
+    public List<SelectItem> getSelections(String entityName, String lable) {
+        List<SelectItem> selections = new ArrayList<>();
+        selections.add(new SelectItem(null, lable));
+        List<StampedNamedEntity> entities = ds.find(ds.getEntityClass(entityName));
+        entities.forEach(e -> {
+            selections.add(new SelectItem(e, e.getName()));
+        });
+        return selections;
+    }
+
+    public void addItem(String name) {
+        try {
+            Field field = item.getClass().getDeclaredField(name);
+            field.setAccessible(true);
+            List value = (List) field.get(item);
+            if (Objects.isNull(value)) {
+                value = new ArrayList<>();
+            }
+            value.add(new SecurityGroup());
+            field.set(item, value);
+        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException ex) {
+            Logger.getLogger(SuperCRUDController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void removeItem(String name, String toString) {
+        try {
+            Field field = item.getClass().getDeclaredField(name);
+            field.setAccessible(true);
+            List value = (List) field.get(item);
+            value.remove(value.stream().filter(e -> e.toString().equals(toString)).findFirst().get());
+            field.set(item, value);
+        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException ex) {
+            Logger.getLogger(SuperCRUDController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public E getItem() {

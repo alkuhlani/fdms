@@ -18,11 +18,16 @@
     <class>com.arslorem.fdms.entities.BasketVoucher</class>
     <class>com.arslorem.fdms.entities.Warehouse</class>
     <class>com.arslorem.fdms.entities.Item</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <class>com.arslorem.fdms.entities.AlternativeReceipt</class>
+    <class>com.arslorem.fdms.entities.MaterialTransfer</class>
+    <class>com.arslorem.fdms.entities.RelativeType</class>
+    <class>com.arslorem.fdms.entities.SecurityGroup</class>
+    <class>com.arslorem.fdms.entities.SecurityPermission</class>
+    <class>com.arslorem.fdms.entities.SecurityUser</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
       <property name="eclipselink.target-database" value="MySQL"/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>

@@ -17,6 +17,8 @@ public class UserController extends SuperCRUDController<SecurityUser> {
     @Override
     public void create() {
         item.setPassword("123");
+        System.out.println(item);
+        System.out.println(item.getGroups().get(0));
         super.create();
     }
 }
