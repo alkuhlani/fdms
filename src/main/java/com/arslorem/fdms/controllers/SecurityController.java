@@ -3,7 +3,6 @@ package com.arslorem.fdms.controllers;
 import static javax.security.enterprise.authentication.mechanism.http.AuthenticationParameters.withParams;
 
 import java.io.Serializable;
-
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -44,10 +43,6 @@ public class SecurityController implements Serializable {
 
     public void logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-    }
-
-    public void changeLanguage(String language) {
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("language", language);
     }
 
     public String getUsername() {

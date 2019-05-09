@@ -18,8 +18,8 @@
                     <h:form>
                         <i jsf:id="languages" class="fa fa-language top-icon"/>
                         <p:menu overlay="true" trigger="languages" my="left top" at="left bottom">
-                            <p:menuitem value="عربي" ajax="false" actionListener="#{securityController.changeLanguage('ar')}"/>
-                            <p:menuitem value="English" ajax="false" actionListener="#{securityController.changeLanguage('en')}"/>
+                            <p:menuitem value="عربي" ajax="false" actionListener="#{session.setAttribute('language', 'ar')}"/>
+                            <p:menuitem value="English" ajax="false" actionListener="#{session.setAttribute('language', 'en')}"/>
                         </p:menu>
                         <i jsf:id="profile" class="fa fa-user-circle top-icon"/>
                         <p:menu overlay="true" trigger="profile" my="left top" at="left bottom">
@@ -36,6 +36,9 @@
                     <h:outputText value=" | "/>
                     <p:commandLink value="#{msg.groups}" update="mainContents"
                                    actionListener="#{paginationController.goTo('/WEB-INF/security/group.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.permissions}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/security/permission.xhtml')}"/>
                     <h:outputText value=" | "/>
                     <p:commandLink value="#{msg.uoms}" update="mainContents"
                                    actionListener="#{paginationController.goTo('/WEB-INF/setting/uom.xhtml')}"/>

@@ -1,5 +1,12 @@
 <ui:composition template="/WEB-INF/templateCRUD.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:my="http://xmlns.jcp.org/jsf/composite/myComp">
     <ui:param name="controller" value="#{groupController}" />
+    <ui:define name="formContent">
+        <my:details value="#{groupController.item.users}" entityName="SecurityUser"
+                    lable="#{msg.users}" itemsName="users"/>
+        <my:details value="#{groupController.item.permissions}" entityName="SecurityPermission"
+                    lable="#{msg.permissions}" itemsName="permissions"/>
+    </ui:define>
 </ui:composition>

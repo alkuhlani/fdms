@@ -18,7 +18,10 @@ public class SecurityGroup extends StampedNamedEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany
+    @JoinTable(name = "USER_GROUP",
+            joinColumns = @JoinColumn(name = "GROUP_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"))
     private List<SecurityUser> users;
 
     @ManyToMany

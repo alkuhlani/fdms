@@ -1,6 +1,7 @@
 package com.arslorem.fdms.services;
 
-import com.arslorem.fdms.entities.SuperEntity;
+import com.arslorem.fdms.entities.StampedNamedEntity;
+import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -9,7 +10,7 @@ import javax.inject.Inject;
  * @author mohammed
  * @param <E>
  */
-public class SuperCRUDService<E extends SuperEntity> {
+public class SuperCRUDService<E extends StampedNamedEntity> implements Serializable {
 
     protected final Class<E> entityClass;
 

@@ -8,5 +8,7 @@
                       value="#{userController.item.userName}" required="true" />
         <my:details value="#{userController.item.groups}" entityName="SecurityGroup"
                     lable="#{msg.groups}" itemsName="groups"/>
+        <my:details value="#{userController.item.permissions}" entityName="SecurityPermission"
+                    lable="#{msg.permissions}" itemsName="permissions"/>
     </ui:define>
 </ui:composition>
