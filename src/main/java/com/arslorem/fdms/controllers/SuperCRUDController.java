@@ -62,6 +62,9 @@ public class SuperCRUDController<E extends StampedNamedEntity> implements Serial
         addFacesMessage(FacesMessage.SEVERITY_INFO, msg("saved"));
         prepareCreate();
     }
+    public void createOnly() {
+        service.create(item);
+    }
 
     public void update() {
         service.update(item);

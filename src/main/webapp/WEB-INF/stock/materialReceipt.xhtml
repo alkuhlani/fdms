@@ -1,5 +1,10 @@
 <ui:composition template="/WEB-INF/templateCRUD.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:my="http://xmlns.jcp.org/jsf/composite/myComp">
     <ui:param name="controller" value="#{materialReceiptController}" />
+    <ui:define name="formContent">
+        <my:selectOneMenu myId="warehouse" value="#{materialReceiptController.item.warehouse}" lable="#{msg.warehouse}"
+                          entityName="Warehouse" required="true"/>
+    </ui:define>
 </ui:composition>

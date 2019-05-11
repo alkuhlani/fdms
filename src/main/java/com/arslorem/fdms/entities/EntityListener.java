@@ -14,7 +14,7 @@ public class EntityListener {
 
     @PrePersist
     public void preCreate(StampedEntity entity) {
-        entity.setId(UUID.randomUUID().getLeastSignificantBits());
+        entity.setId(UUID.randomUUID().getMostSignificantBits());
         entity.setCreateTime(new Date());
         SecurityUser user = new SecurityUser();
         user.setId((Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userId"));

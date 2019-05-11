@@ -52,11 +52,11 @@
                     <p:commandLink value="#{msg.districts}" update="mainContents"
                                    actionListener="#{paginationController.goTo('/WEB-INF/geography/district.xhtml')}"/>
                     <h:outputText value=" | "/>
-                    <p:commandLink value="#{msg.warehouses}" update="mainContents"
-                                   actionListener="#{paginationController.goTo('/WEB-INF/stock/warehouse.xhtml')}"/>
-                    <h:outputText value=" | "/>
                     <p:commandLink value="#{msg.item}" update="mainContents"
                                    actionListener="#{paginationController.goTo('/WEB-INF/stock/item.xhtml')}"/>
+                    <h:outputText value=" | "/>
+                    <p:commandLink value="#{msg.warehouses}" update="mainContents"
+                                   actionListener="#{paginationController.goTo('/WEB-INF/stock/warehouse.xhtml')}"/>
                     <h:outputText value=" | "/>
                     <p:commandLink value="#{msg.materialIssues}" update="mainContents"
                                    actionListener="#{paginationController.goTo('/WEB-INF/stock/materialIssue.xhtml')}"/>

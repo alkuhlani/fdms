@@ -8,6 +8,7 @@
         <cc:attribute name="value" required="true"/>
         <cc:attribute name="required" default="false" />
         <cc:attribute name="entityName" required="true" />
+        <cc:attribute name="disabled" required="false" />
     </cc:interface>
     <cc:implementation>
         <p:outputLabel for="#{cc.attrs.id}" value="#{cc.attrs.lable}"
@@ -15,7 +16,8 @@
         <p:selectOneMenu id="#{cc.attrs.id}" value="#{cc.attrs.value}"
                          filter="true" filterMatchMode="contains" 
                          required="#{cc.attrs.required}" style="display: block"
-                         converter="omnifaces.SelectItemsConverter">
+                         converter="omnifaces.SelectItemsConverter"
+                         disabled="#{cc.attrs.disabled}">
             <f:selectItems value="#{controller.getSelections(cc.attrs.entityName, cc.attrs.lable)}"/>
         </p:selectOneMenu>
     </cc:implementation>

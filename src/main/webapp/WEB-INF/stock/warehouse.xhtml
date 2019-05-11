@@ -4,9 +4,7 @@
                 xmlns:my="http://xmlns.jcp.org/jsf/composite/myComp">
     <ui:param name="controller" value="#{warehouseController}" />
     <ui:define name="formContent">
-        <my:selectOneMenu id="district" lable="${msg.district}"
-                          value="#{warehouseController}"
-                          items="#{warehouseController.districts}"
-                          required="true" />
+        <my:selectOneMenu myId="district" value="#{districtController.item.city}" lable="#{msg.district}"
+                          entityName="District"/>
     </ui:define>
 </ui:composition>

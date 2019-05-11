@@ -1,5 +1,76 @@
 <ui:composition template="/WEB-INF/templateCRUD.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:my="http://xmlns.jcp.org/jsf/composite/myComp">
     <ui:param name="controller" value="#{materialIssueController}" />
+    <ui:define name="formContent">
+        <my:selectOneMenu myId="warehouse" value="#{materialIssueController.item.warehouse}" lable="#{msg.warehouse}"
+                          entityName="Warehouse" required="true"
+                          disabled="#{!materialIssueController.item.isDraft}"/>
+        <h:panelGroup rendered="#{materialIssueController.item.isDraft}" id="issueItem">
+            <p:outputLabel value="#{msg.item}"/>
+            <h:selectOneMenu value="#{materialIssueController.materialIssueItem.item}" converter="omnifaces.SelectItemsConverter">
+                <f:selectItems value="#{materialIssueController.allItems}" var="aitem" itemLabel="#{aitem.name}" itemValue="#{aitem}"/>
+            </h:selectOneMenu>
+            <p:outputLabel value="#{msg.quantity}"/>
+            <p:inputNumber value="#{materialIssueController.materialIssueItem.quantity}"/>
+            <p:outputLabel value="#{msg.note}"/>
+            <p:inputText value="#{materialIssueController.materialIssueItem.name}"/>
+            <p:commandButton value="#{msg.addNewItem}" actionListener="#{materialIssueController.createNewIssueItem}" update="issueItems issueItem"/>
+        </h:panelGroup>
+        <p:dataTable id="issueItems" widgetVar="issueItems" var="item" value="#{materialIssueController.item.materialIssueItems}"
+                     sortBy="#{item.name}"
+                     editable="true" style="margin-bottom:20px">
+            <f:facet name="header">
+                #{msg.items}
+            </f:facet>
+
+            <p:ajax event="rowEdit" listener="#{materialIssueController.onRowEdit}" update="globalMessages" />
+            <p:ajax event="rowEditCancel" listener="#{materialIssueController.onRowCancel}" update="globalMessages" />
+            <p:column headerText="#{msg.name}">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{item.item.name}" />
+                    </f:facet>
+                    <f:facet name="input">
+                        <h:selectOneMenu value="#{item.item}" style="width:100%" converter="omnifaces.SelectItemsConverter" required="true">
+                            <f:selectItems value="#{materialIssueController.allItems}" var="aitem" itemLabel="#{aitem.name}" itemValue="#{aitem}"/>
+                        </h:selectOneMenu>
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="#{msg.quantity}">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{item.quantity}" />
+                    </f:facet>
+                    <f:facet name="input">
+                        <p:inputText id="itemQuantity" value="#{item.quantity}" style="width:100%" required="true"/>
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column headerText="#{msg.note}">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{item.name}" />
+                    </f:facet>
+                    <f:facet name="input">
+                        <p:inputText id="itemNote" value="#{item.name}" style="width:100%"/>
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column>
+                <p:commandButton actionListener="#{materialIssueController.deleteIssueItem(item)}" value="#{msg.delete}" update="issueItems"  process="@this"/>
+            </p:column>
+            <p:column style="width:32px" rendered="#{materialIssueController.item.isDraft}">
+                <p:rowEditor />
+            </p:column>
+
+        </p:dataTable>
+    </ui:define>
 </ui:composition>

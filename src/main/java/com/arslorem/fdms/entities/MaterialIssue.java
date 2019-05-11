@@ -38,6 +38,9 @@ public class MaterialIssue extends StampedNamedEntity{
     @Temporal(TemporalType.TIMESTAMP)
     private Date issueDate;
 
+    @Column(name = "IS_DRAFT")
+    private Boolean isDraft;
+    
     public Warehouse getWarehouse() {
         return warehouse;
     }
@@ -76,6 +79,14 @@ public class MaterialIssue extends StampedNamedEntity{
 
     public void setMaterialTransfers(List<MaterialTransfer> materialTransfers) {
         this.materialTransfers = materialTransfers;
+    }
+
+    public Boolean getIsDraft() {
+        return isDraft;
+    }
+
+    public void setIsDraft(Boolean isDraft) {
+        this.isDraft = isDraft;
     }
     
 }
