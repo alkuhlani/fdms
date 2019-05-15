@@ -10,7 +10,7 @@
                 <p:commandLink title="#{msg.home}" rendered="#{not empty controller.item}" actionListener="#{controller.prepareList}" update="@form">
                     <i class="fa fa-home top-icon"/>
                 </p:commandLink>
-                <p:commandLink title="#{msg.new}" rendered="#{empty controller.item}" actionListener="#{controller.prepareCreate}" update="@form">
+                <p:commandLink title="#{msg.new}" rendered="#{controller.canCreate() and empty controller.item}" actionListener="#{controller.prepareCreate}" update="@form">
                     <i class="fa fa-plus top-icon"/>
                 </p:commandLink>
             </p:fragment>
@@ -19,16 +19,16 @@
             <my:inputText id="name" lable="${msg.name}" value="#{controller.item.name}" required="true" />
             <ui:insert name="formContent"/>
             <h:panelGrid columns="2">
-                <p:commandButton icon="fa fa-save"  value="#{msg.save}" title="#{msg.save}" actionListener="#{controller.create}" update="@form globalMessages" rendered="#{empty controller.item.id}"/>
-                <p:commandButton icon="fa fa-save" value="#{msg.save}" title="#{msg.save}" actionListener="#{controller.update}" update="@form globalMessages" rendered="#{not empty controller.item.id}">
+                <p:commandButton icon="fa fa-save"  value="#{msg.save}" title="#{msg.save}" actionListener="#{controller.create}" update="@form globalMessages" rendered="#{controller.canCreate() and empty controller.item.id}"/>
+                <p:commandButton icon="fa fa-save" value="#{msg.save}" title="#{msg.save}" actionListener="#{controller.update}" update="@form globalMessages" rendered="#{controller.canUpdate() and not empty controller.item.id}">
                     <p:confirm header="${msg.confirmationMessage}" message="${msg.areYouSure}"/>
                 </p:commandButton>
-                <p:commandButton icon="fa fa-remove" value="#{msg.delete}" title="#{msg.delete}" actionListener="#{controller.remove}" update="@form globalMessages" rendered="#{not empty controller.item.id}">
+                <p:commandButton icon="fa fa-remove" value="#{msg.delete}" title="#{msg.delete}" actionListener="#{controller.remove}" update="@form globalMessages" rendered="#{controller.canRemove() and not empty controller.item.id}">
                     <p:confirm header="${msg.confirmationMessage}" message="${msg.areYouSure}"/>
                 </p:commandButton>
             </h:panelGrid>
         </h:panelGroup>
-        <p:dataTable widgetVar="t" value="#{controller.items}" var="item" rendered="#{empty controller.item}" rows="10" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+        <p:dataTable widgetVar="t" value="#{controller.items}" var="item" rendered="#{controller.canDisply() and empty controller.item}" rows="10" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
             <f:event type="preRenderComponent" listener="#{controller['prepareList']}" />
             <p:column sortBy="#{item.name}" filterBy="#{item.name}" filterMatchMode="contains">
                 <p:commandLink value="#{item.name}" actionListener="#{controller.prepareUpdate(item.id)}" update="@form"/>

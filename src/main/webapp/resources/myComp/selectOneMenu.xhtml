@@ -18,6 +18,8 @@
                          required="#{cc.attrs.required}" style="display: block"
                          converter="omnifaces.SelectItemsConverter"
                          disabled="#{cc.attrs.disabled}">
+                         converter="omnifaces.SelectItemsConverter">
+            <f:selectItem itemDisabled="true" itemValue="#{null}" itemLabel="#{msg.select}" noSelectionOption="true"/>
             <f:selectItems value="#{controller.getSelections(cc.attrs.entityName, cc.attrs.lable)}"/>
         </p:selectOneMenu>
     </cc:implementation>

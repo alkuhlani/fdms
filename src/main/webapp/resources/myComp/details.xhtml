@@ -1,34 +1,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:cc="http://xmlns.jcp.org/jsf/composite"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <cc:interface>
         <cc:attribute name="lable" required="true"/>
         <cc:attribute name="value" required="true"/>
         <cc:attribute name="itemsName" required="true"/>
         <cc:attribute name="entityName" required="true" />
     </cc:interface>
-    <cc:implementation>            
-        <p:dataTable id="table" value="#{cc.attrs.value}" var="i" emptyMessage="">
-            <p:column headerText="#{cc.attrs.lable}">
-                <p:selectOneMenu value="#{i}" filter="true" filterMatchMode="contains"
-                                 style="width: 100%" 
-                                 converter="omnifaces.SelectItemsConverter">
-                    <f:selectItems value="#{controller.getSelections(cc.attrs.entityName, cc.attrs.lable)}"/>
-                </p:selectOneMenu>
-            </p:column>
-            <p:column width="15">
+    <cc:implementation>
+        <p:outputLabel value="#{cc.attrs.lable}" style="display: block" />
+        <p:selectOneMenu value="#{controller.temp}" filter="true" filterMatchMode="contains" 
+                         style="width: 100%" converter="omnifaces.SelectItemsConverter">
+            <p:ajax listener="#{controller.addItem(cc.attrs.itemsName)}" update="table globalMessages"/>
+            <f:selectItem itemDisabled="true" itemValue="#{null}" itemLabel="#{msg.select}" noSelectionOption="true"/>
+            <f:selectItems value="#{controller.getSelections(cc.attrs.entityName, cc.attrs.lable)}"/>
+        </p:selectOneMenu>
+        <p:dataTable id="table" value="#{cc.attrs.value}" var="i" emptyMessage="#{msg.emptyMessage}">
+            <p:column style="width: 15px">
                 <p:fragment>
-                    <p:commandLink title="#{msg.delete}" actionListener="#{controller.removeItem(cc.attrs.itemsName, i.toString())}" update="table globalMessages">
+                    <p:commandLink title="#{msg.delete}" actionListener="#{controller.removeItem(cc.attrs.itemsName, i.id)}" update="table globalMessages">
                         <i class="fa fa-remove"/>
                     </p:commandLink>
                 </p:fragment>
             </p:column>
-            <f:facet name="footer">
-                <p:commandLink title="#{msg.add}" actionListener="#{controller.addItem(cc.attrs.itemsName)}" update="table globalMessages">
-                    <i class="fa fa-plus"/>
-                </p:commandLink>
-            </f:facet>
+            <p:column headerText="#{cc.attrs.lable}">
+                <h:outputText value="#{i.name}"/>
+            </p:column>
         </p:dataTable>
     </cc:implementation>
 </html>

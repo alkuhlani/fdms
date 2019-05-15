@@ -2,8 +2,9 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:my="http://xmlns.jcp.org/jsf/composite/myComp">
-    <ui:param name="controller" value="#{districtController}" />
+    <ui:param name="controller" value="#{permissionController}" />
     <ui:define name="formContent">
-        <my:selectOneMenu myId="city" value="#{districtController.item.city}" lable="#{msg.city}" entityName="City"/>
+        <my:inputText id="permisstion" lable="${msg.permission}"
+                      value="#{permissionController.item.permission}" required="true" />
     </ui:define>
 </ui:composition>
